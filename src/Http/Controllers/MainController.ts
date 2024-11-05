@@ -1,19 +1,29 @@
+// @ts-nocheck
 import Controller from "../../lib/Controller";
 import e from "express";
 import UrlModel from "../../Domain/Url/schema/url";
+import {MIDDLEWARE_CONSTANTS} from "../../config/Constants";
 
 class MainController extends Controller {
     protected methods: string[] =  Object.getOwnPropertyNames(MainController.prototype)
     constructor(app: e.Express) {
         super(app);
         this.basePath = '/';
-        this.setGlobalMiddleware('print');
-        this.getHome();
-        this.getSomething();
-        console.log(this.methods);
+        // this.setGlobalMiddleware(MIDDLEWARE_CONSTANTS.PRINT);
+        // this.getHome();
+        console.log("hmmmmmmm");
+        // this.getSomething();
+        // console.log(this.methodExists('getHome'));
     }
 
+
+
+
+
+
     getHome() {
+
+
         this.router.post(this.basePath, async function (req, res, next) {
             const url = new UrlModel({
                 originalUrl: "https://google.com",

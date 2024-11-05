@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, model, Model } from 'mongoose';
+import { Document, Schema, model, Model } from 'mongoose';
 import {mongooseExtensions} from "../../../config/DatabaseObjects";
 
 interface IUrl extends Document {

@@ -3,6 +3,7 @@ import e from "express";
 
 import DatabaseBuilder from "./config/Database";
 import MainController from "./Http/Controllers/MainController";
+import Route from "./lib/Route";
 
 const dbBuilder = new DatabaseBuilder();
 dbBuilder
@@ -14,7 +15,8 @@ try {
     const app: e.Express = e()
     app.use(e.json());
     app.use(e.urlencoded({extended: true}));
-    new MainController(app);
+    // new MainController(app);
+    Route.invokeRoutes(app);
 
     app.listen(1000, () => {
         console.log("listening")
