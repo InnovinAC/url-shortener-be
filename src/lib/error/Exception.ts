@@ -8,7 +8,7 @@ class Exception {
      * @returns {Error} - An error with HTTP status and message.
      */
     static http(status: number = 500, message: string = 'An error occurred'): Error {
-        return createError(status, message);
+         throw createError(status, message);
     }
 }
 
