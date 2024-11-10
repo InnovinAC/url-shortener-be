@@ -23,5 +23,8 @@
   },
   "_moduleAliases": {
     "@": "dist"
+  },
+  "bin": {
+    "artisan": "./artisan.js"
   }
 }

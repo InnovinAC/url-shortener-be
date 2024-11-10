@@ -1,11 +1,11 @@
 import Middleware from "@/lib/Http/Middleware";
 import e from "express";
 
-class PrintRequestBody implements Middleware {
+class TestMiddleware implements Middleware {
     handle(request: e.Request, response: e.Response, next: e.NextFunction) {
-        console.log(request.body);
-        // next()
+        // Define middleware implementation within here
+        next();
     }
 
 }
-export default PrintRequestBody;
+export default TestMiddleware;

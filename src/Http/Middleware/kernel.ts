@@ -1,6 +1,6 @@
-import Middleware from "../../lib/Http/Middleware";
-import PrintRequestBody from "./PrintRequestBody";
-import Exception from "../../lib/error/Exception";
+import Middleware from "@/lib/Http/Middleware";
+import PrintRequestBody from "@/Http/Middleware/PrintRequestBody";
+import Exception from "@/lib/error/Exception";
 import e from "express";
 
 class Kernel {

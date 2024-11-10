@@ -1,15 +1,12 @@
-import Controller from "../../lib/Http/Controller";
+import Controller from "@/lib/Http/Controller";
 import e from "express";
-import UrlModel from "../../Domain/Url/schema/url";
-import {MIDDLEWARE_CONSTANTS} from "../../config/Constants";
-import HandlerResponse from "@/lib/reponse/HandlerResponse";
+import ResponseHandler from "@/lib/response/ResponseHandler";
 
 class MainController extends Controller {
+    // This must be defined to make it pertain to this class and not root Controller
     protected methods: string[] =  Object.getOwnPropertyNames(MainController.prototype)
     constructor(app: e.Express) {
         super(app);
-        this.basePath = '/';
-        // console.log(this.methodExists('getHome'));
     }
 
 
@@ -23,6 +20,7 @@ class MainController extends Controller {
 
 
     getSomething(req: e.Request, res: e.Response, next: e.NextFunction) {
+        console.log(res.locals.hehhe)
         res.send("Okay")
     }
 }

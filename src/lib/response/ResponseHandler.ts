@@ -1,6 +1,6 @@
 import e from "express";
 
-class HandlerResponse {
+class ResponseHandler {
 
     static respond(res: e.Response, body: Record<string, any> | Array<Record<string, any>>, statusCode: number = 200) {
         res.setHeader("Content-Type", "application/json");
@@ -14,4 +14,4 @@ class HandlerResponse {
 
 }
 
-export default HandlerResponse;
+export default ResponseHandler;

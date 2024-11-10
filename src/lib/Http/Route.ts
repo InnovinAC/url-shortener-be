@@ -1,10 +1,9 @@
 import e from "express";
 import Controller from "./Controller";
 import Kernel from "../../Http/Middleware/kernel";
-import {middleware} from "yargs";
 
 // Updated RouteDefinition to include middleware array
-type RouteDefinition = [typeof Controller, string, string, string, string[], string?]; // [Controller Class, HTTP Method, URL Path, Controller Method, Middleware Array]
+type RouteDefinition = [typeof Controller, string, string, string, string[], string?]; // [Controller Class, HTTP Method, URL Path, Controller Method, Middleware Array, Single Middleware]
 
 class Route {
     static allRoutes: RouteDefinition[] = [];
@@ -62,18 +61,19 @@ class Route {
             if (controllerInstance && controllerInstance.methodExists(methodName)) {
                 const kernel = Kernel.getInstance();
 
+                // Where the magic occurs
                 app[httpMethod](path,
-                    async (req, res, next) => {
+                    async (req: e.Request, res: e.Response, next: e.NextFunction) => {
                         try {
                             // Invoke middleware only once for a path
-                            if (!this.pathsMiddlewareCalledOn.includes(storedPath)) {
+                            // if (!this.pathsMiddlewareCalledOn.includes(storedPath)) {
                                 console.log("inside for")
                                 for (const middleware of routeMiddleware) {
                                     if (!middleware) return;
                                     kernel.invokeMiddleware(middleware, req, res, next);
                                 }
-                                this.pathsMiddlewareCalledOn.push(storedPath);
-                            }
+                                // this.pathsMiddlewareCalledOn.push(storedPath);
+                            // }
 
                             if (!res.headersSent) { // Only call controller method if no response was sent
                                 if (singleMiddleware) {
@@ -91,6 +91,7 @@ class Route {
             }
 
         }
+
     }
 }
 
