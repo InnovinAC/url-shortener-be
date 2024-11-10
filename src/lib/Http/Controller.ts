@@ -1,9 +1,10 @@
 import e from "express";
-import Kernel from "../Http/Middleware/kernel";
+import Kernel from "../../Http/Middleware/kernel";
 
 class Controller {
     protected basePath: string;
     protected router: any;
+    private static instance:  Controller;
     protected app: any | e.Express;
     protected methods: string[] =  Object.getOwnPropertyNames(this)
     constructor(app: e.Express) {
@@ -11,19 +12,18 @@ class Controller {
         this.router = e.Router();
 
     }
-    protected methodExists(method: string) {
+    public methodExists(method: string) {
         return (this.methods.indexOf(method) > -1)
     }
     protected invokeRoute() {
         this.app.use(this.basePath, this.router);
     }
 
-
-
-    setGlobalMiddleware(middleware: string) {
-        this.app.use(this.basePath, (...args) => {
-            Kernel.getInstance().invokeMiddleware(middleware, ...args);
-        }, this.router)
+    protected static getInstance(app: e.Express):  Controller {
+        if (!this.instance) {
+            this.instance = new this(app);
+        }
+        return this.instance
     }
 }
 

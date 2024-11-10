@@ -1,5 +1,4 @@
-// @ts-nocheck
-import Controller from "../../lib/Controller";
+import Controller from "../../lib/Http/Controller";
 import e from "express";
 import UrlModel from "../../Domain/Url/schema/url";
 import {MIDDLEWARE_CONSTANTS} from "../../config/Constants";
@@ -9,10 +8,6 @@ class MainController extends Controller {
     constructor(app: e.Express) {
         super(app);
         this.basePath = '/';
-        // this.setGlobalMiddleware(MIDDLEWARE_CONSTANTS.PRINT);
-        // this.getHome();
-        console.log("hmmmmmmm");
-        // this.getSomething();
         // console.log(this.methodExists('getHome'));
     }
 
@@ -21,22 +16,16 @@ class MainController extends Controller {
 
 
 
-    getHome() {
-
-
-        this.router.post(this.basePath, async function (req, res, next) {
+    async getHome(req: e.Request, res: e.Response, next: e.NextFunction) {
+        console.log("innnn")
             const url = new UrlModel({
                 originalUrl: "https://google.com",
                 shortCode: "6Ghg89n",
 
             })
-            try {
+                throw new Error("Something unexpected happened");
                 await url.save();
                 return res.send("Hello world");
-            } catch (e) {
-                res.send(e)
-            }
-        })
     }
 
 

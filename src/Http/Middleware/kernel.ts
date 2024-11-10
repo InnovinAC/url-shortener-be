@@ -1,4 +1,4 @@
-import Middleware from "../../lib/Middleware";
+import Middleware from "../../lib/Http/Middleware";
 import PrintRequestBody from "./PrintRequestBody";
 
 class Kernel {
@@ -12,12 +12,12 @@ class Kernel {
         return this.instance ? this.instance: new Kernel();
     }
 
-    // constructor();
-
     invokeMiddleware(middleware: string, ...args: any) {
-        // Todo: Check if valid middleware
+        if (!this.middleware[middleware]) {
+            throw new Error(`Middleware ${middleware} not found`);
+        }
         // @ts-ignore
-        return this.middleware[middleware].handle(...args)
+        return (this.middleware[middleware] as Middleware).handle(...args)
     }
 }
 

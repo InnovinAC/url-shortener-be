@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction, ErrorRequestHandler} from 'express';
 interface Middleware {
-    handle(request: Request, response: Response, next: NextFunction): void;
+    handle(...args: [Request, Response, NextFunction]): void;
     handleWithError?(error: ErrorRequestHandler, request: Request, response: Response, next: NextFunction): void;
 }
 

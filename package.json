@@ -4,7 +4,7 @@
   "description": "Url Shortener Backend",
   "scripts": {
     "build": "tsc",
-    "start": "npx tsc & node dist/index.js"
+    "start": "rm -r dist;tsc; node dist/index.js"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
